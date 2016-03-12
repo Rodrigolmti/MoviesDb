@@ -66,6 +66,7 @@
                                         <connections>
                                             <outlet property="genreLB" destination="OxK-8s-bHm" id="hdc-nN-TMT"/>
                                             <outlet property="titleLB" destination="M9p-qF-LQk" id="ftF-Z2-EmZ"/>
+                                            <segue destination="3po-jA-toA" kind="show" id="fEK-KI-fkq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -127,6 +128,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="244.5" y="337.5"/>
+        </scene>
+        <!--Movie Detail Controller-->
+        <scene sceneID="VaA-UA-qYK">
+            <objects>
+                <viewController id="3po-jA-toA" customClass="MovieDetailController" customModule="MoviesDb" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W1k-gX-QQu"/>
+                        <viewControllerLayoutGuide type="bottom" id="grz-h7-SkI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ECw-84-efo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fb2-85-UsO">
+                                <rect key="frame" x="20" y="267" width="327" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Director" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7V-Iz-iwu">
+                                <rect key="frame" x="20" y="310" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USC-Vk-umF">
+                                <rect key="frame" x="20" y="407" width="335" height="252"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdU-JV-dlI">
+                                <rect key="frame" x="20" y="354" width="47" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UvW-JQ-Gl3">
+                                <rect key="frame" x="0.0" y="9" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0Ae-KE-87Z"/>
+                                    <barButtonItem systemItem="reply" id="knN-Wh-Lbu">
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="wAx-FR-3Zh"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CV2-tD-YGF">
+                                <rect key="frame" x="0.0" y="53" width="375" height="206"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="directorDetail" destination="E7V-Iz-iwu" id="AMs-WC-BQT"/>
+                        <outlet property="imageDetal" destination="CV2-tD-YGF" id="L2J-FU-XJG"/>
+                        <outlet property="plotDetail" destination="USC-Vk-umF" id="Xtd-T1-SsS"/>
+                        <outlet property="titleDetail" destination="Fb2-85-UsO" id="eau-tT-8Ct"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OuT-IZ-M6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="688.5" y="337.5"/>
         </scene>
     </scenes>
 </document>

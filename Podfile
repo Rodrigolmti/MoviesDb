@@ -8,3 +8,7 @@ end
 
 pod 'Alamofire', '~> 3.0'
 
+pod "Nuke"
+pod "Nuke-Alamofire-Plugin" # optional
+
+
