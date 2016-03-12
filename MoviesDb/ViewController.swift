@@ -15,7 +15,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     var movie = Movie()
     var allMovies = [Movie]()
-    var usersDefault = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var tableViewMovie: UITableView!
     @IBOutlet weak var movieTF: UITextField!
@@ -34,7 +33,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {        
         super.viewDidLoad()
-        configUser()
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,23 +51,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as! CustomCell
         
-        cell.titleLB.text = self.movie.title
-        cell.genreLB.text = self.movie.genre
+        var movieRow = Movie()
+        movieRow = self.allMovies[indexPath.row]
         
-        if ((movie.baseUrl?.isEmpty) == nil) {
-            cell.posterIMG.nk_setImageWith(NSURL(string: self.movie.baseUrl!)!)
+        cell.titleLB.text = movieRow.title
+        cell.genreLB.text = movieRow.genre
+        
+        if ((movieRow.baseUrlImg?.isEmpty) != nil) {
+            cell.imageIMG.nk_setImageWith(NSURL(string: movieRow.baseUrlImg!)!)
+            //cell.imageIMG.layer.cornerRadius = CGRectGetWidth(cell.imageIMG.frame) / 2
+            //cell.imageIMG.layer.masksToBounds = true
         }
-        
-        //cell.imageMovie.layer.cornerRadius = CGRectGetWidth(cell.imageMovie.frame) / 2
-        //cell.imageMovie.layer.masksToBounds = true
         
         return cell
     }
     
-    func configUser() {
-        self.usersDefault.setObject(allMovies, forKey: "movies")
-    }
-
     // Request JSON on OMDB
     
     func getMovie(query: String) {
@@ -85,12 +81,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             
                             print("Json value: " + json.description)
                             
-                            let movies = Movie()
-                           
                             let error = json["Error"].string
                             if(error == nil) {
                                 if (json["imdbID"].string! != self.movie.imdbId) {
                                 
+                                    var movies = Movie()
+                                    var aux = Movie()
+                                    
                                     movies.imdbId = json["imdbID"].string
                                     movies.title = json["Title"].string!
                                     movies.genre = json["Genre"].string!
@@ -98,21 +95,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                     movies.plot = json["Plot"].stringValue
                                     movies.imdbRating = json["imdbRating"].string!
                                     movies.actors = json["Actors"].stringValue
+                                    movies.baseUrlImg = json["Poster"].stringValue
                                 
-                                    movies.baseUrl = json["Poster"].stringValue
-                                
-                                    self.allMovies.append(movies)
+                                    aux = movies
+                                    
+                                    self.allMovies.append(aux)
                                     self.tableViewMovie.reloadData()
                                 
-                                    for var i=0; i < self.allMovies.count; i++ {
-                                        print("Filmes incluidos: ")
-                                        print(self.allMovies[0])
-                                    }
-                                
                                     self.movie = movies
-                                
-                                    print(movies.baseUrl!)
-                                    print(movies.actors)
+                                    movies = Movie()
                                 } else {
                                     self.alert(NSLocalizedString("Movies already added", comment: ""), message: NSLocalizedString("This movies was already added", comment: ""))
                                 }
@@ -130,6 +121,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.alert(NSLocalizedString("No Internet", comment: ""), message: NSLocalizedString("There's no internet connection, try again later", comment: ""))
         }
     }
+    
+    // Detail segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let indexPath = self.tableViewMovie?.indexPathForCell(sender as! UITableViewCell) {

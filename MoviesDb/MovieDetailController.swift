@@ -35,12 +35,13 @@ class MovieDetailController: UIViewController {
     }
     
     func configDetail() {
+        imageDetal.nk_setImageWith(NSURL(string: currentMovie.baseUrlImg!)!)
         titleDetail.text = currentMovie.title
         directorDetail.text = currentMovie.director
         plotDetail.text = currentMovie.plot
-        //actorsDetail.text = currentMovie.actors!
-        //ratingDetail.text = currentMovie.imdbRating
-        //genreDetail.text = currentMovie.genre
+        actorsDetail.text = currentMovie.actors!
+        ratingDetail.text = currentMovie.imdbRating
+        genreDetail.text = currentMovie.genre
     }
     
 }

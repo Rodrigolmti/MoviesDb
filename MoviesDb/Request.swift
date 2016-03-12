@@ -11,6 +11,8 @@ import SwiftyJSON
 
 class Resquest {
 
+    // Request JSON OMDB api
+    
     func requestJson(baseUrl: String) -> JSON{
         var json: JSON = nil
         

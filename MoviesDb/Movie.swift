@@ -16,7 +16,7 @@ class Movie: NSObject {
     var genre: String?
     var imdbId: String?
     var imdbRating: String?
-    var baseUrl: String?
+    var baseUrlImg: String?
     var actors: String?
         
     override init() {
