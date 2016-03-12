@@ -15,6 +15,9 @@ class MovieDetailController: UIViewController {
     @IBOutlet weak var titleDetail: UILabel!
     @IBOutlet weak var directorDetail: UILabel!
     @IBOutlet weak var plotDetail: UILabel!
+    @IBOutlet weak var actorsDetail: UILabel!
+    @IBOutlet weak var ratingDetail: UILabel!
+    @IBOutlet weak var genreDetail: UILabel!
     
     var currentMovie = Movie()
 
@@ -35,6 +38,9 @@ class MovieDetailController: UIViewController {
         titleDetail.text = currentMovie.title
         directorDetail.text = currentMovie.director
         plotDetail.text = currentMovie.plot
+        //actorsDetail.text = currentMovie.actors!
+        //ratingDetail.text = currentMovie.imdbRating
+        //genreDetail.text = currentMovie.genre
     }
     
 }

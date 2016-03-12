@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     var movie = Movie()
     var allMovies = [Movie]()
+    var usersDefault = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var tableViewMovie: UITableView!
     @IBOutlet weak var movieTF: UITextField!
@@ -33,6 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {        
         super.viewDidLoad()
+        configUser()
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,11 +60,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.posterIMG.nk_setImageWith(NSURL(string: self.movie.baseUrl!)!)
         }
         
-        //cell.imageMovie.image = UIImage(named: images[indexPath.row])
         //cell.imageMovie.layer.cornerRadius = CGRectGetWidth(cell.imageMovie.frame) / 2
         //cell.imageMovie.layer.masksToBounds = true
         
         return cell
+    }
+    
+    func configUser() {
+        self.usersDefault.setObject(allMovies, forKey: "movies")
     }
 
     // Request JSON on OMDB
@@ -81,23 +86,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             print("Json value: " + json.description)
                             
                             let movies = Movie()
-                            
-                            if (json["imdbID"].string! != self.movie.imdbId) {
+                           
+                            let error = json["Error"].string
+                            if(error == nil) {
+                                if (json["imdbID"].string! != self.movie.imdbId) {
                                 
-                                movies.imdbId = json["imdbID"].string
-                                movies.title = json["Title"].string!
-                                movies.genre = json["Genre"].string!
-                                movies.director = json["Director"].string!
-                                movies.plot = json["Plot"].stringValue
+                                    movies.imdbId = json["imdbID"].string
+                                    movies.title = json["Title"].string!
+                                    movies.genre = json["Genre"].string!
+                                    movies.director = json["Director"].string!
+                                    movies.plot = json["Plot"].stringValue
+                                    movies.imdbRating = json["imdbRating"].string!
+                                    movies.actors = json["Actors"].stringValue
                                 
-                                movies.baseUrl = json["Poster"].stringValue
+                                    movies.baseUrl = json["Poster"].stringValue
                                 
-                                self.allMovies.append(movies)
-                                self.tableViewMovie.reloadData()
+                                    self.allMovies.append(movies)
+                                    self.tableViewMovie.reloadData()
                                 
-                                self.movie = movies
+                                    for var i=0; i < self.allMovies.count; i++ {
+                                        print("Filmes incluidos: ")
+                                        print(self.allMovies[0])
+                                    }
                                 
-                                print(movies.baseUrl!)
+                                    self.movie = movies
+                                
+                                    print(movies.baseUrl!)
+                                    print(movies.actors)
+                                } else {
+                                    self.alert(NSLocalizedString("Movies already added", comment: ""), message: NSLocalizedString("This movies was already added", comment: ""))
+                                }
+                            } else {
+                               self.alert(NSLocalizedString("Ops, Something Wrong", comment: ""), message: NSLocalizedString(error!, comment: ""))
                             }
                         }
                     case .Failure(let error):
