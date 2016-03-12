@@ -85,9 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MoviesDb/Alamofire.framework"
+  install_framework "Pods-MoviesDb/Nuke.framework"
+  install_framework "Pods-MoviesDb/NukeAlamofirePlugin.framework"
   install_framework "Pods-MoviesDb/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MoviesDb/Alamofire.framework"
+  install_framework "Pods-MoviesDb/Nuke.framework"
+  install_framework "Pods-MoviesDb/NukeAlamofirePlugin.framework"
   install_framework "Pods-MoviesDb/SwiftyJSON.framework"
 fi

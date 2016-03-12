@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Nuke-Alamofire-Plugin.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Nuke.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MoviesDb.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,7 +37,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>57CFC4DF5A94826729A3A532FC59EE52</key>
+		<key>4DF42E73BE56153E373A10022230CB96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -37,12 +47,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9078C94D422980E43FC7DB68F6523CCA</key>
+		<key>7C1499CD0087EE6B2B571663C54F64AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FCF60F35ABC2A45E8BFE47F3EDBB0F9D</key>
+		<key>877744F71BFB47A1C89923A12B459995</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8BABB3337F78A25CD669058F04538710</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C2D98D67F85AC9274CEC05A3CE0BECBD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

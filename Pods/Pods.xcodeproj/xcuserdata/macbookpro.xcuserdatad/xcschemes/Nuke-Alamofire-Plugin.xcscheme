@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '74D05C5E22481F8305A96E7E'
-               BlueprintName = 'Pods-MoviesDb'
+               BlueprintIdentifier = '810A6FC8BE03BF674E516326'
+               BlueprintName = 'Nuke-Alamofire-Plugin'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_MoviesDb.framework'>
+               BuildableName = 'NukeAlamofirePlugin.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
