@@ -16,7 +16,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     let appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var allMovies = [DataMovies]()
-    var allMoviesData = [NSManagedObject]()
 
     @IBOutlet weak var tableViewMovie: UITableView!
     @IBOutlet weak var movieTF: UITextField!
@@ -37,6 +36,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
     }
 
+    override func viewDidAppear(animated: Bool) {
+
+        let fetchRequest = NSFetchRequest(entityName: "Movies")
+        let context:NSManagedObjectContext = appDel.managedObjectContext
+        
+        do {
+            let results = try context.executeFetchRequest(fetchRequest)
+            self.allMovies = results as! [DataMovies]
+            self.tableViewMovie.reloadData()
+            print("Movies loaded!")
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
@@ -78,7 +92,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if NetworkRechability.isConnectedToNetwork() == true {
         
-                let baseUrl: String = "http://www.omdbapi.com/?t=\(query)&tomatoes=true"
+                let baseUrl: String = "http://www.omdbapi.com/?t=\(query)&tomatoes=true&type=movie"
+                        
                 Alamofire.request(.GET, baseUrl).validate().responseJSON { response in
                     switch response.result {
                     case .Success:

@@ -8,7 +8,6 @@
 
 import UIKit
 import Nuke
-import CoreData
 
 class MovieDetailController: UIViewController {
 
@@ -20,7 +19,7 @@ class MovieDetailController: UIViewController {
     @IBOutlet weak var ratingDetail: UILabel!
     @IBOutlet weak var genreDetail: UILabel!
     
-    var currentMovie = ViewController.
+    var currentMovie = DataMovies()
     
     override func viewDidLoad() {
         super.viewDidLoad()
