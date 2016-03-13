@@ -10,12 +10,14 @@ import UIKit
 import Nuke
 import Alamofire
 import SwiftyJSON
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var movie = Movie()
-    var allMovies = [Movie]()
-    
+    let appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var allMovies = [DataMovies]()
+    var allMoviesData = [NSManagedObject]()
+
     @IBOutlet weak var tableViewMovie: UITableView!
     @IBOutlet weak var movieTF: UITextField!
     
@@ -51,14 +53,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as! CustomCell
         
-        var movieRow = Movie()
+        var movieRow = createObject()
         movieRow = self.allMovies[indexPath.row]
         
         cell.titleLB.text = movieRow.title
         cell.genreLB.text = movieRow.genre
         
-        if ((movieRow.baseUrlImg?.isEmpty) != nil) {
-            cell.imageIMG.nk_setImageWith(NSURL(string: movieRow.baseUrlImg!)!)
+        if ((movieRow.baseimg?.isEmpty) != nil) {
+            cell.imageIMG.nk_setImageWith(NSURL(string: movieRow.baseimg!)!)
             //cell.imageIMG.layer.cornerRadius = CGRectGetWidth(cell.imageIMG.frame) / 2
             //cell.imageIMG.layer.masksToBounds = true
         }
@@ -69,6 +71,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Request JSON on OMDB
     
     func getMovie(query: String) {
+        
+        let context:NSManagedObjectContext = appDel.managedObjectContext
+        let ent = NSEntityDescription.entityForName("Movies", inManagedObjectContext: context)
+        let movies = DataMovies(entity: ent!, insertIntoManagedObjectContext:context)
         
         if NetworkRechability.isConnectedToNetwork() == true {
         
@@ -82,28 +88,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             print("Json value: " + json.description)
                             
                             let error = json["Error"].string
+                            
                             if(error == nil) {
-                                if (json["imdbID"].string! != self.movie.imdbId) {
-                                
-                                    var movies = Movie()
-                                    var aux = Movie()
+                                if (json["imdbID"].string! != movies.imdbid){
                                     
-                                    movies.imdbId = json["imdbID"].string
+                                    movies.imdbid = json["imdbID"].string
                                     movies.title = json["Title"].string!
                                     movies.genre = json["Genre"].string!
                                     movies.director = json["Director"].string!
                                     movies.plot = json["Plot"].stringValue
-                                    movies.imdbRating = json["imdbRating"].string!
+                                    movies.rating = json["imdbRating"].string!
                                     movies.actors = json["Actors"].stringValue
-                                    movies.baseUrlImg = json["Poster"].stringValue
-                                
-                                    aux = movies
+                                    movies.baseimg = json["Poster"].stringValue
                                     
-                                    self.allMovies.append(aux)
+                                    self.allMovies.append(movies)
                                     self.tableViewMovie.reloadData()
-                                
-                                    self.movie = movies
-                                    movies = Movie()
+                                    
+                                    do {
+                                        try context.save()
+                                    } catch {
+                                        fatalError("Failure to save context: \(error)")
+                                    }
+
+                                    print("Object saved!")
+                                    print("Object: ")
+                                    print(movies)
+                                    
+                                    
                                 } else {
                                     self.alert(NSLocalizedString("Movies already added", comment: ""), message: NSLocalizedString("This movies was already added", comment: ""))
                                 }
@@ -120,6 +131,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             } else {
                 self.alert(NSLocalizedString("No Internet", comment: ""), message: NSLocalizedString("There's no internet connection, try again later", comment: ""))
         }
+    }
+    
+    func createObject() -> DataMovies {
+        let context:NSManagedObjectContext = appDel.managedObjectContext
+        let ent = NSEntityDescription.entityForName("Movies", inManagedObjectContext: context)
+        let movies = DataMovies(entity: ent!, insertIntoManagedObjectContext:context)
+        return movies
     }
     
     // Detail segue

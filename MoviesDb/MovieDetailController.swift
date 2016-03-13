@@ -8,6 +8,7 @@
 
 import UIKit
 import Nuke
+import CoreData
 
 class MovieDetailController: UIViewController {
 
@@ -19,8 +20,8 @@ class MovieDetailController: UIViewController {
     @IBOutlet weak var ratingDetail: UILabel!
     @IBOutlet weak var genreDetail: UILabel!
     
-    var currentMovie = Movie()
-
+    var currentMovie = ViewController.
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configDetail()
@@ -35,12 +36,12 @@ class MovieDetailController: UIViewController {
     }
     
     func configDetail() {
-        imageDetal.nk_setImageWith(NSURL(string: currentMovie.baseUrlImg!)!)
+        imageDetal.nk_setImageWith(NSURL(string: currentMovie.baseimg!)!)
         titleDetail.text = currentMovie.title
         directorDetail.text = currentMovie.director
         plotDetail.text = currentMovie.plot
         actorsDetail.text = currentMovie.actors!
-        ratingDetail.text = currentMovie.imdbRating
+        ratingDetail.text = currentMovie.rating
         genreDetail.text = currentMovie.genre
     }
     
