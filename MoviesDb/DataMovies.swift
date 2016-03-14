@@ -20,5 +20,9 @@ class DataMovies: NSManagedObject {
     @NSManaged var rating: String?
     @NSManaged var title: String?
     @NSManaged var imdbid: String?
+    
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
 
 }

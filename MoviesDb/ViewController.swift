@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 getMovie(movieName)
             }
         } else {
-            self.alert(NSLocalizedString("Ops .:.", comment: ""), message: NSLocalizedString("Please put the name of a movie!", comment: "lala"))
+            self.alert(NSLocalizedString("Ops .:.", comment: ""), message: NSLocalizedString("Please put the name of a movie!", comment: ""))
         }
         
     }
@@ -45,10 +45,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let results = try context.executeFetchRequest(fetchRequest)
             self.allMovies = results as! [DataMovies]
             self.tableViewMovie.reloadData()
-            print("Movies loaded!")
+            //print(self.allMovies)
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.allMovies.removeAll()
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,9 +60,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
-    //func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //return "last added movies"
-    //}
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "last added movies"
+//    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allMovies.count
@@ -75,8 +79,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if ((movieRow.baseimg?.isEmpty) != nil) {
             cell.imageIMG.nk_setImageWith(NSURL(string: movieRow.baseimg!)!)
-            //cell.imageIMG.layer.cornerRadius = CGRectGetWidth(cell.imageIMG.frame) / 2
-            //cell.imageIMG.layer.masksToBounds = true
         }
         
         return cell
@@ -99,9 +101,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     case .Success:
                         if let value = response.result.value {
                             let json = JSON(value)
-                            
-                            print("Json value: " + json.description)
-                            
                             let error = json["Error"].string
                             
                             if(error == nil) {
@@ -162,7 +161,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let detailVC = segue.destinationViewController as! MovieDetailController
             let currentMovie = allMovies[indexPath.row]
             
-            detailVC.currentMovie = currentMovie
+            detailVC.baseImg = currentMovie.baseimg
+            detailVC.titleMovie = currentMovie.title
+            detailVC.director = currentMovie.director
+            detailVC.plot = currentMovie.plot
+            detailVC.rating = currentMovie.rating
+            detailVC.actors = currentMovie.actors
+            detailVC.genre = currentMovie.genre
+
         }
     }
     

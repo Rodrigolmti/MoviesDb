@@ -8,6 +8,7 @@
 
 import UIKit
 import Nuke
+import CoreData
 
 class MovieDetailController: UIViewController {
 
@@ -19,8 +20,14 @@ class MovieDetailController: UIViewController {
     @IBOutlet weak var ratingDetail: UILabel!
     @IBOutlet weak var genreDetail: UILabel!
     
-    var currentMovie = DataMovies()
-    
+    var baseImg: String!
+    var titleMovie: String!
+    var director: String!
+    var plot: String!
+    var actors: String!
+    var genre: String!
+    var rating: String!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         configDetail()
@@ -34,14 +41,18 @@ class MovieDetailController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func configDetail() {
-        imageDetal.nk_setImageWith(NSURL(string: currentMovie.baseimg!)!)
-        titleDetail.text = currentMovie.title
-        directorDetail.text = currentMovie.director
-        plotDetail.text = currentMovie.plot
-        actorsDetail.text = currentMovie.actors!
-        ratingDetail.text = currentMovie.rating
-        genreDetail.text = currentMovie.genre
+    func createObject(movie: DataMovies) -> DataMovies{
+        return movie
+    }
+    
+    func configDetail() {        
+        imageDetal.nk_setImageWith(NSURL(string: baseImg!)!)
+        titleDetail.text = titleMovie
+        directorDetail.text = director
+        plotDetail.text = plot
+        actorsDetail.text = actors!
+        ratingDetail.text = rating
+        genreDetail.text = genre
     }
     
 }
