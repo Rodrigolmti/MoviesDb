@@ -17,10 +17,8 @@
 		5210BF6E1C9359EF00A96EA8 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5210BF6D1C9359EF00A96EA8 /* CustomCell.swift */; };
 		5210BF751C939B0200A96EA8 /* NetworkRechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5210BF741C939B0200A96EA8 /* NetworkRechability.swift */; };
 		5210BF771C93B71C00A96EA8 /* MovieDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5210BF761C93B71C00A96EA8 /* MovieDetailController.swift */; };
-		5210BF7A1C94539700A96EA8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5210BF791C94539700A96EA8 /* Request.swift */; };
 		5210BFBB1C94970000A96EA8 /* DataMovies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5210BFB91C94970000A96EA8 /* DataMovies.xcdatamodeld */; };
 		521122E81C93094E00571E9A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521122E71C93094E00571E9A /* Movie.swift */; };
-		52BC48B41C960A10003490B9 /* DataMovies+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC48B21C960A10003490B9 /* DataMovies+CoreDataProperties.swift */; };
 		52BC48B51C960A10003490B9 /* DataMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC48B31C960A10003490B9 /* DataMovies.swift */; };
 		8E449F9EB9851421AFB7C720 /* Pods_MoviesDb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 390541F33CCC488B66831430 /* Pods_MoviesDb.framework */; };
 		AF96A19347D0919643CA637A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 110A831FEDD3425555DB2759 /* Pods.framework */; };
@@ -63,10 +61,8 @@
 		5210BF6D1C9359EF00A96EA8 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		5210BF741C939B0200A96EA8 /* NetworkRechability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRechability.swift; sourceTree = "<group>"; };
 		5210BF761C93B71C00A96EA8 /* MovieDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailController.swift; sourceTree = "<group>"; };
-		5210BF791C94539700A96EA8 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		5210BFBA1C94970000A96EA8 /* DataMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataMovies.xcdatamodel; sourceTree = "<group>"; };
 		521122E71C93094E00571E9A /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		52BC48B21C960A10003490B9 /* DataMovies+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataMovies+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		52BC48B31C960A10003490B9 /* DataMovies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMovies.swift; sourceTree = "<group>"; };
 		D0667DAC3727F20EF4124F5D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				5210BFB81C9496DE00A96EA8 /* data */,
-				5210BF781C94536600A96EA8 /* Api */,
 				5210BF731C939A7B00A96EA8 /* View */,
 				5210BF721C939A6E00A96EA8 /* Utils */,
 				521122E61C93093500571E9A /* Model */,
@@ -173,19 +168,10 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		5210BF781C94536600A96EA8 /* Api */ = {
-			isa = PBXGroup;
-			children = (
-				5210BF791C94539700A96EA8 /* Request.swift */,
-			);
-			name = Api;
-			sourceTree = "<group>";
-		};
 		5210BFB81C9496DE00A96EA8 /* data */ = {
 			isa = PBXGroup;
 			children = (
 				5210BFB91C94970000A96EA8 /* DataMovies.xcdatamodeld */,
-				52BC48B21C960A10003490B9 /* DataMovies+CoreDataProperties.swift */,
 				52BC48B31C960A10003490B9 /* DataMovies.swift */,
 			);
 			name = data;
@@ -404,9 +390,7 @@
 				520D31B31C926EC80083215F /* AppDelegate.swift in Sources */,
 				5210BF751C939B0200A96EA8 /* NetworkRechability.swift in Sources */,
 				5210BFBB1C94970000A96EA8 /* DataMovies.xcdatamodeld in Sources */,
-				5210BF7A1C94539700A96EA8 /* Request.swift in Sources */,
 				52BC48B51C960A10003490B9 /* DataMovies.swift in Sources */,
-				52BC48B41C960A10003490B9 /* DataMovies+CoreDataProperties.swift in Sources */,
 				5210BF6E1C9359EF00A96EA8 /* CustomCell.swift in Sources */,
 				521122E81C93094E00571E9A /* Movie.swift in Sources */,
 			);
