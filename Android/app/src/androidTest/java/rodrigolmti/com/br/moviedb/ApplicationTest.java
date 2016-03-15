@@ -1,4 +1,4 @@
-package rodrigolmti.com.br.moviesdb;
+package rodrigolmti.com.br.moviedb;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
