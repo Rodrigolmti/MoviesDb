@@ -1,17 +1,19 @@
 package rodrigolmti.com.br.moviesdb;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,13 +22,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import rodrigolmti.com.br.moviedb.R;
 import rodrigolmti.com.br.moviesdb.AdapterListView.AdapterMovie;
 import rodrigolmti.com.br.moviesdb.Data.Movie;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
     private TextView tvTitle;
     private EditText etName;
     private ListView lv;
@@ -37,6 +40,7 @@ public class MainActivity extends Activity {
     AdapterMovie adapter;
     ArrayList<Movie> movies = new ArrayList<>();
 
+    public final static String EXTRA_MESSAGE = "rodrigolmti.com.br.moviedb.MESSAGE";
     RequestQueue requestQueue;
 
     @Override
@@ -50,6 +54,7 @@ public class MainActivity extends Activity {
 
         requestQueue = Volley.newRequestQueue(this);
 
+        //OnClick Button
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText et = (EditText) findViewById(R.id.etName);
@@ -60,11 +65,18 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Construct the data source
+        //Onclick listView
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+
+                Movie movie = (Movie) adapter.getItemAtPosition(position);
+               showDetailActivity(v);
+            }
+        });
+
         ArrayList<Movie> arrayOfUsers = new ArrayList<>();
-        // Create the adapter to convert the array to views
         adapter = new AdapterMovie(this, movies);
-        // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
     }
@@ -105,6 +117,12 @@ public class MainActivity extends Activity {
                 });
 
         Singleton.getInstance(this).addToRequestQueue(jsObRequest);
+    }
+
+    public void showDetailActivity(View v) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("movie", movie);
+        startActivity(intent);
     }
 
     public void showToast(String text) {
