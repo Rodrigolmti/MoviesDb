@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import rodrigolmti.com.br.moviedb.R;
-import rodrigolmti.com.br.moviesdb.Data.Movie;
+import rodrigolmti.com.br.moviesdb.Model.Movie;
 import rodrigolmti.com.br.moviesdb.Util.DownloadImageTask;
 
 public class AdapterMovie extends ArrayAdapter<Movie> {
