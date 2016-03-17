@@ -15,6 +15,7 @@ import CoreData
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     var allMovies = [DataMovies]()
 
     @IBOutlet weak var tableViewMovie: UITableView!
@@ -50,8 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView,cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("customCell") as! CustomCell
         
-        var movieRow = createObject()
-        movieRow = self.allMovies[indexPath.row]
+        let movieRow = self.allMovies[indexPath.row]
         
         cell.titleLB.text = movieRow.title
         cell.genreLB.text = movieRow.genre
@@ -64,8 +64,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Request JSON on OMDB
     func getMovie(query: String) {
-        let movies = createObject()
-
         if NetworkRechability.isConnectedToNetwork() == true {
                 let baseUrl: String = "http://www.omdbapi.com/?t=\(query)&tomatoes=true&type=movie"
                 Alamofire.request(.GET, baseUrl).validate().responseJSON { response in
@@ -73,10 +71,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     case .Success:
                         if let value = response.result.value {
                             let json = JSON(value)
-                            print(json.description)
                             let error = json["Error"].string
                             
                             if(error == nil) {
+                                let movies = self.createObject()
+                                
                                 movies.imdbid = json["imdbID"].string
                                 movies.title = json["Title"].string!
                                 movies.genre = json["Genre"].string!
@@ -86,7 +85,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 movies.actors = json["Actors"].stringValue
                                 movies.baseimg = json["Poster"].stringValue
                                     
-                                self.saveObject(movies)
+                                self.saveObject()
+                                self.allMovies.append(movies)
+                                self.tableViewMovie.reloadData()
                             } else {
                                self.alert(NSLocalizedString("Ops, Something Wrong", comment: ""), message: NSLocalizedString("Try again", comment: ""))
                             }
@@ -101,23 +102,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    //Crete object
+    //Create object
     func createObject() -> DataMovies {
         let context:NSManagedObjectContext = appDel.managedObjectContext
         let ent = NSEntityDescription.entityForName("Movies", inManagedObjectContext: context)
         let movies = DataMovies(entity: ent!, insertIntoManagedObjectContext:context)
         return movies
     }
+    
     //Save object
-    func saveObject(movie : DataMovies) {
+    func saveObject() {
         let context:NSManagedObjectContext = appDel.managedObjectContext
         do {
             try context.save()
-            self.allMovies.append(movie)
         } catch {
             fatalError("Failure to save context: \(error)")
         }
-        self.tableViewMovie.reloadData()
     }
     
     //Load object
