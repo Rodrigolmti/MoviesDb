@@ -3,6 +3,7 @@ package rodrigolmti.com.br.moviesdb.View;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvRating = (TextView) findViewById(R.id.rating);
         TextView tvPlot = (TextView) findViewById(R.id.plot);
 
-        new DownloadImageTask(imPoster).execute(movie.getBaseIgm());
+        new DownloadImageTask(imPoster).execute(movie.getBaseImg());
         tvTitle.setText(movie.getTitle());
         tvActors.setText(movie.getActors());
         tvGenre.setText(movie.getGenre());

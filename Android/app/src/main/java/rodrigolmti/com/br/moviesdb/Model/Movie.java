@@ -14,21 +14,9 @@ public class Movie implements Serializable {
     String actors;
     String plot;
     String rating;
-    String imdbId;
-    String baseIgm;
     String director;
-
-    public Movie(String title, String genre, String actors, String plot, String rating,
-                 String imdbId, String baseIgm, String director) {
-        this.title = title;
-        this.genre = genre;
-        this.actors = actors;
-        this.plot = plot;
-        this.rating = rating;
-        this.imdbId = imdbId;
-        this.baseIgm = baseIgm;
-        this.director = director;
-    }
+    String imdbId;
+    String baseImg;
 
     public String getTitle() {
         return title;
@@ -54,13 +42,11 @@ public class Movie implements Serializable {
         return imdbId;
     }
 
-    public String getBaseIgm() {
-        return baseIgm;
+    public String getBaseImg() {
+        return baseImg;
     }
 
-    public String getDirector() {
-        return director;
-    }
+    public String getDirector() {return director;}
 
     public void setTitle(String title) {
         this.title = title;
@@ -86,8 +72,8 @@ public class Movie implements Serializable {
         this.imdbId = imdbId;
     }
 
-    public void setBaseIgm(String baseIgm) {
-        this.baseIgm = baseIgm;
+    public void setBaseImg(String baseIgm) {
+        this.baseImg = baseIgm;
     }
 
     public void setDirector(String director) {

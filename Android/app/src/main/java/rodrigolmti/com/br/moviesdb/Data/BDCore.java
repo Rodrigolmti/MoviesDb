@@ -8,15 +8,6 @@ public class BDCore extends SQLiteOpenHelper{
     private static final String NOME_BD = "MOVIES";
     private static final int VERSAO_BD = 7;
 
-    String title;
-    String genre;
-    String actors;
-    String plot;
-    String rating;
-    String imdbId;
-    String baseIgm;
-    String director;
-
     public BDCore(Context ctx) {
         super(ctx, NOME_BD,null,VERSAO_BD);
     }

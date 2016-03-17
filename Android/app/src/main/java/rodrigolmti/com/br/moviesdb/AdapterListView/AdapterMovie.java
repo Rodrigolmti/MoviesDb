@@ -28,10 +28,12 @@ public class AdapterMovie extends ArrayAdapter<Movie> {
         ImageView imgPoster = (ImageView) convertView.findViewById(R.id.imgPoster);
         TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
         TextView tvGenre = (TextView) convertView.findViewById(R.id.tvGenre);
+        TextView tvRating = (TextView) convertView.findViewById(R.id.tvRating);
 
-        new DownloadImageTask(imgPoster).execute(movie.getBaseIgm());
+        new DownloadImageTask(imgPoster).execute(movie.getBaseImg());
         tvTitle.setText(movie.getTitle());
         tvGenre.setText(movie.getGenre());
+        tvRating.setText("Rating: " + movie.getRating());
         return convertView;
     }
 }

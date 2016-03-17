@@ -2,8 +2,11 @@ package rodrigolmti.com.br.moviesdb.View;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,6 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import rodrigolmti.com.br.moviedb.R;
 import rodrigolmti.com.br.moviesdb.AdapterListView.AdapterMovie;
+import rodrigolmti.com.br.moviesdb.Data.BD;
 import rodrigolmti.com.br.moviesdb.Model.Movie;
 import rodrigolmti.com.br.moviesdb.Singleton;
 
@@ -32,7 +36,8 @@ public class MainActivity extends FragmentActivity {
     String title;
     Movie movie;
     AdapterMovie adapter;
-    ArrayList<Movie> movies = new ArrayList<>();
+
+    ArrayList<Movie> movies = new ArrayList<>();;
 
     RequestQueue requestQueue;
 
@@ -51,12 +56,17 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 EditText etTitle = (EditText) findViewById(R.id.etName);
                 title = etTitle.getText().toString();
-                if(title.isEmpty()) {
-                    showToast("Please enter a name of a movie!");
+
+                if (isOnline()) {
+                    if (title.isEmpty()) {
+                        showToast("Please enter a name of a movie!");
+                    } else {
+                        String url = "http://www.omdbapi.com/?t=" + title + "&tomatoes=true&type=movie";
+                        etTitle.setText("");
+                        getJson(url);
+                    }
                 } else {
-                    String url = "http://www.omdbapi.com/?t=" + title + "&tomatoes=true&type=movie";
-                    etTitle.setText("");
-                    getJson(url);
+                    showToast("Please verify your connection and try again!");
                 }
             }
         });
@@ -65,13 +75,19 @@ public class MainActivity extends FragmentActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
-                showDetailActivity(v);
+               Movie movie = movies.get(position);
+               showDetailActivity(v,movie);
             }
         });
+
+        BD bd = new BD(this);
+        movies = bd.search();
 
         adapter = new AdapterMovie(this, movies);
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
     }
 
     public void getJson(String url) {
@@ -81,18 +97,20 @@ public class MainActivity extends FragmentActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            String title = response.getString("Title");
-                            String genre = response.getString("Genre");
-                            String actors = response.getString("Actors");
-                            String plot = response.getString("Plot");
-                            String rating = response.getString("imdbRating");
-                            String imdbid = response.getString("imdbID");
-                            String poster = response.getString("Poster");
-                            String director = response.getString("Director");
+                            movie = new Movie();
 
-                            movie = new Movie(title,genre,actors,plot,rating,imdbid,poster,director);
+                            movie.setTitle(response.getString("Title"));
+                            movie.setGenre(response.getString("Genre"));
+                            movie.setActors(response.getString("Actors"));
+                            movie.setPlot(response.getString("Plot"));
+                            movie.setRating(response.getString("imdbRating"));
+                            movie.setDirector(response.getString("Director"));
+                            movie.setImdbId(response.getString("imdbID"));
+                            movie.setBaseImg(response.getString("Poster"));
+
                             movies.add(movie);
                             adapter.notifyDataSetChanged();
+                            saveObject(movie);
 
                         } catch (JSONException e) {
                             String error = e.getMessage().toString();
@@ -114,7 +132,7 @@ public class MainActivity extends FragmentActivity {
         Singleton.getInstance(this).addToRequestQueue(jsObRequest);
     }
 
-    public void showDetailActivity(View v) {
+    public void showDetailActivity(View v, Movie movie) {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("movie", movie);
         startActivity(intent);
@@ -124,6 +142,18 @@ public class MainActivity extends FragmentActivity {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
-       toast.show();
+        toast.show();
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    public void saveObject(Movie movie) {
+        BD bd = new BD(this);
+        bd.insert(movie);
     }
 }
