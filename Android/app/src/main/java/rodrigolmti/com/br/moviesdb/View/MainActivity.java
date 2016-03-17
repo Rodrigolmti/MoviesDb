@@ -21,7 +21,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import rodrigolmti.com.br.moviedb.R;
 import rodrigolmti.com.br.moviesdb.AdapterListView.AdapterMovie;
@@ -113,7 +112,7 @@ public class MainActivity extends FragmentActivity {
                             saveObject(movie);
 
                         } catch (JSONException e) {
-                            String error = e.getMessage().toString();
+                            String error = e.toString();
                             if(error.equals("No value for Title")) {
                                 showToast("Movie not found!");
                            } else {

@@ -7,9 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import rodrigolmti.com.br.moviedb.R;
 import rodrigolmti.com.br.moviesdb.Model.Movie;
 
@@ -42,7 +40,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvRating = (TextView) findViewById(R.id.rating);
         TextView tvPlot = (TextView) findViewById(R.id.plot);
 
-        Picasso.with(this).load(movie.getBaseImg()).into(imPoster);
+        Picasso.with(this).load(movie.getBaseImg()).resize(1100,690).into(imPoster);
         tvTitle.setText(movie.getTitle());
         tvActors.setText(movie.getActors());
         tvGenre.setText(movie.getGenre());
