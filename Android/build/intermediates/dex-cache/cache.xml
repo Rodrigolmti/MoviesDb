@@ -1,2 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/macbookpro/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/pre-dexed/debug/picasso-2.5.2_322d356f5da16873dc1be38c5527614f78f31172.jar" />
+    </item>
+    <item
+        jar="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="292a9fa091757208efa65e77eef63088247e51f3">
+        <dex dex="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.2.0_dfce49af722a6f107223aa05690b3ba7ae47c481.jar" />
+    </item>
+    <item
+        jar="/Users/macbookpro/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/pre-dexed/debug/library-1.0.19_da420a1bcda50ed46c2130c16c7ab2d625b9aef0.jar" />
+    </item>
+    <item
+        jar="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/jars/libs/internal_impl-23.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6e239441500605809818997dd63b62a947195f8c">
+        <dex dex="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.0_fad77cd6f200f70b86dcf2b76b7d0138f34249ef.jar" />
+    </item>
+    <item
+        jar="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6e3578f92f7462d1a935a1d36173e3bdd1234976">
+        <dex dex="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.2.0_3603b37cd363e3deabe4d437765adaaa220fafc6.jar" />
+    </item>
+    <item
+        jar="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e5f32fa48a3eb2de0c987025c11b6e3864b634d9">
+        <dex dex="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.0_9f7ed6771fad3f65792f3ac4714027cb674e6be2.jar" />
+    </item>
+    <item
+        jar="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8c108c22c99e794eff255bb34d2a461200c4cbb0">
+        <dex dex="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.2.0_f048b3351fb70e6c108c714fbab05b3b3ae0485b.jar" />
+    </item>
+    <item
+        jar="/Users/macbookpro/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.0/support-annotations-23.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c5bf571bb10462bd90e5419ade67793f71acbc87">
+        <dex dex="/Users/macbookpro/AndroidStudioProjects/MovieDb/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.0_c2bf5f035ad4fee8879a3326c44387bfb5d415a9.jar" />
+    </item>
+
+</items>

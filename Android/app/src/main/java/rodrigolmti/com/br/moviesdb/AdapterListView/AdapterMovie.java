@@ -8,11 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import rodrigolmti.com.br.moviedb.R;
 import rodrigolmti.com.br.moviesdb.Model.Movie;
-import rodrigolmti.com.br.moviesdb.Util.DownloadImageTask;
+import rodrigolmti.com.br.moviesdb.Util.CircleTransform;
 
 public class AdapterMovie extends ArrayAdapter<Movie> {
     public AdapterMovie(Context context, ArrayList<Movie> movies) {
@@ -30,7 +32,8 @@ public class AdapterMovie extends ArrayAdapter<Movie> {
         TextView tvGenre = (TextView) convertView.findViewById(R.id.tvGenre);
         TextView tvRating = (TextView) convertView.findViewById(R.id.tvRating);
 
-        new DownloadImageTask(imgPoster).execute(movie.getBaseImg());
+        Picasso.with(convertView.getContext()).load(movie.getBaseImg()).transform(new CircleTransform()).into(imgPoster);
+        //Picasso.with(convertView.getContext()).load(movie.getBaseImg()).into(imgPoster);
         tvTitle.setText(movie.getTitle());
         tvGenre.setText(movie.getGenre());
         tvRating.setText("Rating: " + movie.getRating());
