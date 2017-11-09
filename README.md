@@ -1,7 +1,9 @@
-# MoviesDb
-MoviesDb repository, devUps test. App for record movies and request on OMDB API with name a movie, API return a JSON file with a information of a movie.
+# DevUps/DevelopesS2 application test. 
 
-  Apps:
-    - Android
-    - Ios
+This app consume the API OMDB, and retrieve informations about movies, you can search an movie by	name. Both apps make a cache in the device.
 
+Android use mysqlite and iOS coreData
+
+## Authors
+
+* **Rodrigo Lopes** - *Initial work* - [Rodrigolmti](https://github.com/Rodrigolmti)
